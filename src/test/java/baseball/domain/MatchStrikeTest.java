@@ -1,43 +1,35 @@
 package baseball.domain;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MatchNumTest {
+class MatchStrikeTest {
+
     List<Integer> answer;
-    MatchNum m;
+    MatchStrike strike;
     @BeforeEach
     void setUp() {
-         answer =Arrays.asList(1,2,3);
-        m = new MatchNum();
+        answer =Arrays.asList(1,2,3);
+        strike = new MatchStrike();
     }
     @Test
-    void arra(){
-        List<Integer> a =Arrays.asList(1,2,3);
-        int result =a.get(1);
-        assertThat(result).isEqualTo(2);
+    void getStrike() {
+        int result = strike.matchStrike(answer,Arrays.asList(1,2,3));
+        assertThat(result) .isEqualTo(3);
     }
-    @Test
-    void getMatchNum() {
-        int result =m.match(answer,Arrays.asList(1,2,3));
-        assertThat(result).isEqualTo(3);
-    }
-
-    @DisplayName("숫자 확인")
     @ParameterizedTest
-    @CsvSource({"1,2,3,3","2,5,1,2","6,7,8,0","5,6,3,1"})
+    @CsvSource({"1,2,3,3","2,5,1,0","6,7,8,0","5,6,3,1","2,1,3,1","1,4,3,2"})
     void getMatchNum2(int number1,int number2,int number3,int expected){
-        int expect =m.match(answer,Arrays.asList(number1,number2,number3));
+        int expect =strike.matchStrike(answer,Arrays.asList(number1,number2,number3));
         assertThat(expect).isEqualTo(expected);
     }
-
 }
